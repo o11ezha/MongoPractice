@@ -1,0 +1,866 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: api
+  name: api
+spec:
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    io.kompose.service: api
+status:
+  loadBalancer: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-router-1
+  name: mongo-router-1
+spec:
+  ports:
+    - name: "27217"
+      port: 27217
+      targetPort: 27017
+  selector:
+    io.kompose.service: mongo-router-1
+status:
+  loadBalancer: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-router-2
+  name: mongo-router-2
+spec:
+  ports:
+    - name: "27218"
+      port: 27218
+      targetPort: 27017
+  selector:
+    io.kompose.service: mongo-router-2
+status:
+  loadBalancer: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-server-1
+  name: mongo-server-1
+spec:
+  ports:
+    - name: "27117"
+      port: 27117
+      targetPort: 27017
+  selector:
+    io.kompose.service: mongo-server-1
+status:
+  loadBalancer: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-server-2
+  name: mongo-server-2
+spec:
+  ports:
+    - name: "27118"
+      port: 27118
+      targetPort: 27017
+  selector:
+    io.kompose.service: mongo-server-2
+status:
+  loadBalancer: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-shard-1-1
+  name: mongo-shard-1-1
+spec:
+  ports:
+    - name: "27317"
+      port: 27317
+      targetPort: 27017
+  selector:
+    io.kompose.service: mongo-shard-1-1
+status:
+  loadBalancer: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-shard-1-2
+  name: mongo-shard-1-2
+spec:
+  ports:
+    - name: "27318"
+      port: 27318
+      targetPort: 27017
+  selector:
+    io.kompose.service: mongo-shard-1-2
+status:
+  loadBalancer: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-shard-2-1
+  name: mongo-shard-2-1
+spec:
+  ports:
+    - name: "27319"
+      port: 27319
+      targetPort: 27017
+  selector:
+    io.kompose.service: mongo-shard-2-1
+status:
+  loadBalancer: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-shard-2-2
+  name: mongo-shard-2-2
+spec:
+  ports:
+    - name: "27320"
+      port: 27320
+      targetPort: 27017
+  selector:
+    io.kompose.service: mongo-shard-2-2
+status:
+  loadBalancer: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: postgres-master
+  name: postgres-master
+spec:
+  ports:
+    - name: "5435"
+      port: 5435
+      targetPort: 5432
+  selector:
+    io.kompose.service: postgres-master
+status:
+  loadBalancer: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: postgres-slave
+  name: postgres-slave
+spec:
+  ports:
+    - name: "5440"
+      port: 5440
+      targetPort: 5432
+  selector:
+    io.kompose.service: postgres-slave
+status:
+  loadBalancer: {}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: api
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: api
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/forkuber-mongo-cluster: "true"
+        io.kompose.network/forkuber-postgres-cluster: "true"
+        io.kompose.service: api
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_USER
+              value: postgres
+          image: api
+          imagePullPolicy: Never
+          name: api
+          ports:
+            - containerPort: 8080
+          resources: {}
+      restartPolicy: Always
+status: {}
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  creationTimestamp: null
+  name: forkuber-mongo-cluster
+spec:
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              io.kompose.network/forkuber-mongo-cluster: "true"
+  podSelector:
+    matchLabels:
+      io.kompose.network/forkuber-mongo-cluster: "true"
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  creationTimestamp: null
+  name: forkuber-postgres-cluster
+spec:
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              io.kompose.network/forkuber-postgres-cluster: "true"
+  podSelector:
+    matchLabels:
+      io.kompose.network/forkuber-postgres-cluster: "true"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-router-1
+  name: mongo-router-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mongo-router-1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/forkuber-mongo-cluster: "true"
+        io.kompose.service: mongo-router-1
+    spec:
+      containers:
+        - args:
+            - mongos
+            - --configdb
+            - R-mongo-server/mongo-server-1:27017,mongo-server-2:27017
+            - --bind_ip_all
+          image: mongo:4.2.8
+          name: mongo-router-1
+          ports:
+            - containerPort: 27017
+          resources: {}
+          volumeMounts:
+            - mountPath: /scripts
+              name: mongo-router-1-hostpath0
+            - mountPath: /data/db
+              name: mongo-router-1-hostpath1
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\scripts
+          name: mongo-router-1-hostpath0
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\mongo-router-1
+          name: mongo-router-1-hostpath1
+status: {}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-router-2
+  name: mongo-router-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mongo-router-2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/forkuber-mongo-cluster: "true"
+        io.kompose.service: mongo-router-2
+    spec:
+      containers:
+        - args:
+            - mongos
+            - --configdb
+            - R-mongo-server/mongo-server-1:27017,mongo-server-2:27017
+            - --bind_ip_all
+          image: mongo:4.2.8
+          name: mongo-router-2
+          ports:
+            - containerPort: 27017
+          resources: {}
+          volumeMounts:
+            - mountPath: /scripts
+              name: mongo-router-2-hostpath0
+            - mountPath: /data/db
+              name: mongo-router-2-hostpath1
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\scripts
+          name: mongo-router-2-hostpath0
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\mongo-router-2
+          name: mongo-router-2-hostpath1
+status: {}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-server-1
+  name: mongo-server-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mongo-server-1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/forkuber-mongo-cluster: "true"
+        io.kompose.service: mongo-server-1
+    spec:
+      containers:
+        - args:
+            - mongod
+            - --port
+            - "27017"
+            - --configsvr
+            - --replSet
+            - R-mongo-server
+            - --bind_ip_all
+          image: mongo:4.2.8
+          name: mongo-server-1
+          ports:
+            - containerPort: 27017
+          resources: {}
+          volumeMounts:
+            - mountPath: /scripts
+              name: mongo-server-1-hostpath0
+            - mountPath: /data/db
+              name: mongo-server-1-hostpath1
+            - mountPath: /data/configdb
+              name: mongo-server-1-hostpath2
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\scripts
+          name: mongo-server-1-hostpath0
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\mongo-server-1
+          name: mongo-server-1-hostpath1
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\mongo-server-1\configdb
+          name: mongo-server-1-hostpath2
+status: {}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-server-2
+  name: mongo-server-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mongo-server-2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/forkuber-mongo-cluster: "true"
+        io.kompose.service: mongo-server-2
+    spec:
+      containers:
+        - args:
+            - mongod
+            - --port
+            - "27017"
+            - --configsvr
+            - --replSet
+            - R-mongo-server
+            - --bind_ip_all
+          image: mongo:4.2.8
+          name: mongo-server-2
+          ports:
+            - containerPort: 27017
+          resources: {}
+          volumeMounts:
+            - mountPath: /scripts
+              name: mongo-server-2-hostpath0
+            - mountPath: /data/db
+              name: mongo-server-2-hostpath1
+            - mountPath: /data/configdb
+              name: mongo-server-2-hostpath2
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\scripts
+          name: mongo-server-2-hostpath0
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\mongo-server-2
+          name: mongo-server-2-hostpath1
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\mongo-server-2\configdb
+          name: mongo-server-2-hostpath2
+status: {}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-shard-1-1
+  name: mongo-shard-1-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mongo-shard-1-1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/forkuber-mongo-cluster: "true"
+        io.kompose.service: mongo-shard-1-1
+    spec:
+      containers:
+        - args:
+            - mongod
+            - --shardsvr
+            - --replSet
+            - R-mongo-shard-01
+            - --bind_ip_all
+            - --port
+            - "27017"
+          image: mongo:4.2.8
+          name: mongo-shard-1-1
+          ports:
+            - containerPort: 27017
+          resources: {}
+          volumeMounts:
+            - mountPath: /scripts
+              name: mongo-shard-1-1-hostpath0
+            - mountPath: /data/db
+              name: mongo-shard-1-1-hostpath1
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\scripts
+          name: mongo-shard-1-1-hostpath0
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\mongo-shard-1-1
+          name: mongo-shard-1-1-hostpath1
+status: {}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-shard-1-2
+  name: mongo-shard-1-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mongo-shard-1-2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/forkuber-mongo-cluster: "true"
+        io.kompose.service: mongo-shard-1-2
+    spec:
+      containers:
+        - args:
+            - mongod
+            - --shardsvr
+            - --replSet
+            - R-mongo-shard-01
+            - --bind_ip_all
+            - --port
+            - "27017"
+          image: mongo:4.2.8
+          name: mongo-shard-1-2
+          ports:
+            - containerPort: 27017
+          resources: {}
+          volumeMounts:
+            - mountPath: /scripts
+              name: mongo-shard-1-2-hostpath0
+            - mountPath: /data/db
+              name: mongo-shard-1-2-hostpath1
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\scripts
+          name: mongo-shard-1-2-hostpath0
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\mongo-shard-1-2
+          name: mongo-shard-1-2-hostpath1
+status: {}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-shard-2-1
+  name: mongo-shard-2-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mongo-shard-2-1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/forkuber-mongo-cluster: "true"
+        io.kompose.service: mongo-shard-2-1
+    spec:
+      containers:
+        - args:
+            - mongod
+            - --shardsvr
+            - --replSet
+            - R-mongo-shard-02
+            - --bind_ip_all
+            - --port
+            - "27017"
+          image: mongo:4.2.8
+          name: mongo-shard-2-1
+          ports:
+            - containerPort: 27017
+          resources: {}
+          volumeMounts:
+            - mountPath: /scripts
+              name: mongo-shard-2-1-hostpath0
+            - mountPath: /data/db
+              name: mongo-shard-2-1-hostpath1
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\scripts
+          name: mongo-shard-2-1-hostpath0
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\mongo-shard-2-1
+          name: mongo-shard-2-1-hostpath1
+status: {}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongo-shard-2-2
+  name: mongo-shard-2-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mongo-shard-2-2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/forkuber-mongo-cluster: "true"
+        io.kompose.service: mongo-shard-2-2
+    spec:
+      containers:
+        - args:
+            - mongod
+            - --shardsvr
+            - --replSet
+            - R-mongo-shard-02
+            - --bind_ip_all
+            - --port
+            - "27017"
+          image: mongo:4.2.8
+          name: mongo-shard-2-2
+          ports:
+            - containerPort: 27017
+          resources: {}
+          volumeMounts:
+            - mountPath: /scripts
+              name: mongo-shard-2-2-hostpath0
+            - mountPath: /data/db
+              name: mongo-shard-2-2-hostpath1
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\scripts
+          name: mongo-shard-2-2-hostpath0
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\mongo-shard-2-2
+          name: mongo-shard-2-2-hostpath1
+status: {}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: postgres-master
+  name: postgres-master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: postgres-master
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/forkuber-postgres-cluster: "true"
+        io.kompose.service: postgres-master
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DATABASE
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_USER
+              value: postgres
+          image: postgres
+          name: postgres-master
+          ports:
+            - containerPort: 5432
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-master-hostpath0
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\postgres-master
+          name: postgres-master-hostpath0
+status: {}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: postgres-slave
+  name: postgres-slave
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: postgres-slave
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yaml -o kubernetes.yaml --volumes hostPath
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/forkuber-postgres-cluster: "true"
+        io.kompose.service: postgres-slave
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_USER
+              value: postgres
+          image: postgres
+          name: postgres-slave
+          ports:
+            - containerPort: 5432
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-slave-hostpath0
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: D:\Projects\JavaProjs\practice7-8\forkuber\postgres-slave
+          name: postgres-slave-hostpath0
+status: {}
+

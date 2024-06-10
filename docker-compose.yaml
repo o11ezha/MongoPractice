@@ -1,0 +1,187 @@
+version: '3.7'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - postgres-master
+      - mongo-router-1
+    links:
+      - postgres-master
+      - mongo-router-1
+    networks:
+      - mongo-cluster
+      - postgres-cluster
+
+  postgres-master:
+    image: postgres
+    container_name: postgres-master
+    restart: always
+    ports:
+      - "5435:5432"
+    volumes:
+      - ./postgres-master:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=postgres
+    networks:
+      - postgres-cluster
+
+  postgres-slave:
+    image: postgres
+    container_name: postgres-slave
+    restart: always
+    ports:
+      - "5440:5432"
+    volumes:
+      - ./postgres-slave:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - postgres-cluster
+
+  mongo-server-1:
+    image: mongo:4.2.8
+    container_name: mongo-server-1
+    command: mongod --port 27017 --configsvr --replSet R-mongo-server --bind_ip_all
+    restart: always
+    ports:
+      - "27117:27017"
+    volumes:
+      - ./scripts:/scripts
+      - ./mongo-server-1:/data/db
+      - ./mongo-server-1/configdb:/data/configdb
+    links:
+      - mongo-server-2
+    networks:
+      - mongo-cluster
+
+  mongo-server-2:
+    image: mongo:4.2.8
+    container_name: mongo-server-2
+    command: mongod --port 27017 --configsvr --replSet R-mongo-server --bind_ip_all
+    restart: always
+    ports:
+      - "27118:27017"
+    volumes:
+        - ./scripts:/scripts
+        - ./mongo-server-2:/data/db
+        - ./mongo-server-2/configdb:/data/configdb
+    networks:
+        - mongo-cluster
+
+  mongo-router-1:
+      image: mongo:4.2.8
+      container_name: mongo-router-1
+      command: mongos --configdb R-mongo-server/mongo-server-1:27017,mongo-server-2:27017 --bind_ip_all
+      restart: always
+      ports:
+          - "27217:27017"
+      volumes:
+        - ./scripts:/scripts
+        - ./mongo-router-1:/data/db
+      links:
+        - mongo-router-2
+      networks:
+          - mongo-cluster
+
+  mongo-router-2:
+        image: mongo:4.2.8
+        container_name: mongo-router-2
+        command: mongos --configdb R-mongo-server/mongo-server-1:27017,mongo-server-2:27017 --bind_ip_all
+        restart: always
+        ports:
+            - "27218:27017"
+        volumes:
+          - ./scripts:/scripts
+          - ./mongo-router-2:/data/db
+        networks:
+            - mongo-cluster
+
+  mongo-shard-1-1:
+    image: mongo:4.2.8
+    container_name: mongo-shard-1-1
+    command: mongod --shardsvr --replSet R-mongo-shard-01 --bind_ip_all --port 27017
+    restart: always
+    ports:
+      - "27317:27017"
+    volumes:
+      - ./scripts:/scripts
+      - ./mongo-shard-1-1:/data/db
+    links:
+      - mongo-shard-1-2
+    networks:
+      - mongo-cluster
+
+  mongo-shard-1-2:
+    image: mongo:4.2.8
+    container_name: mongo-shard-1-2
+    command: mongod --shardsvr --replSet R-mongo-shard-01 --bind_ip_all --port 27017
+    restart: always
+    ports:
+      - "27318:27017"
+    volumes:
+      - ./scripts:/scripts
+      - ./mongo-shard-1-2:/data/db
+    networks:
+      - mongo-cluster
+
+  mongo-shard-2-1:
+    image: mongo:4.2.8
+    container_name: mongo-shard-2-1
+    command: mongod --shardsvr --replSet R-mongo-shard-02 --bind_ip_all --port 27017
+    restart: always
+    ports:
+      - "27319:27017"
+    volumes:
+      - ./scripts:/scripts
+      - ./mongo-shard-2-1:/data/db
+    links:
+      - mongo-shard-2-2
+    networks:
+      - mongo-cluster
+
+  mongo-shard-2-2:
+    image: mongo:4.2.8
+    container_name: mongo-shard-2-2
+    command: mongod --shardsvr --replSet R-mongo-shard-02 --bind_ip_all --port 27017
+    restart: always
+    ports:
+      - "27320:27017"
+    volumes:
+      - ./scripts:/scripts
+      - ./mongo-shard-2-2:/data/db
+    networks:
+      - mongo-cluster
+
+networks:
+  mongo-cluster:
+      driver: bridge
+  postgres-cluster:
+      driver: bridge
+
+volumes:
+  mongo-server-1:
+  mongo-server-2:
+
+  mongo-router-1:
+  mongo-router-2:
+
+  mongo-shard-1-1:
+  mongo-shard-1-2:
+
+  mongo-shard-2-1:
+  mongo-shard-2-2:
+
+  postgres-master:
+  postgres-slave:
